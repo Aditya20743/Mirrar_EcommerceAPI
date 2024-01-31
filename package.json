@@ -4,14 +4,20 @@
   "description": "Assignment ",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "test": "mocha src/tests/*.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "chai": "^5.0.3",
+    "dotenv": "^16.4.1",
     "express": "^4.18.2",
-    "mocha": "^10.2.0",
     "mongoose": "^8.1.1"
+  },
+  "devDependencies": {
+    "chai": "^5.0.3",
+    "chai-http": "^4.4.0",
+    "esm": "^3.2.25",
+    "mocha": "^10.2.0"
   }
 }
