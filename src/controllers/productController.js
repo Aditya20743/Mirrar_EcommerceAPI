@@ -1,4 +1,5 @@
-const Product = require('../models/productModel');
+const Product = require("../models/productModel");
+const productSearchHelper = require("../helpers/productSearchHelper");
 
 exports.createProduct = async (req, res) => {
   try {
@@ -14,7 +15,7 @@ exports.getProduct = async (req, res) => {
   try {
     const product = await Product.findById(req.params.productId);
     if (!product) {
-      return res.status(404).json({ message: 'Product not found' });
+      return res.status(404).json({ message: "Product not found" });
     }
     res.status(200).json(product);
   } catch (error) {
@@ -30,7 +31,7 @@ exports.updateProduct = async (req, res) => {
       { new: true }
     );
     if (!updatedProduct) {
-      return res.status(404).json({ message: 'Product not found' });
+      return res.status(404).json({ message: "Product not found" });
     }
     res.status(200).json(updatedProduct);
   } catch (error) {
@@ -40,9 +41,11 @@ exports.updateProduct = async (req, res) => {
 
 exports.deleteProduct = async (req, res) => {
   try {
-    const deletedProduct = await Product.findByIdAndDelete(req.params.productId);
+    const deletedProduct = await Product.findByIdAndDelete(
+      req.params.productId
+    );
     if (!deletedProduct) {
-      return res.status(404).json({ message: 'Product not found' });
+      return res.status(404).json({ message: "Product not found" });
     }
     res.status(204).send();
   } catch (error) {
@@ -50,47 +53,60 @@ exports.deleteProduct = async (req, res) => {
   }
 };
 
+exports.searchProducts = async (req, res) => {
+  try {
+      let query = Product.find();
+      query = productSearchHelper(query, req);
+
+      const products = await query.exec(); // Execute the query
+
+      return res.status(200).json(products);
+  } catch (error) {
+      return res.status(500).json({ error: error.message });
+  }
+  };
+
 exports.createVariant = async (req, res) => {
   try {
     const product = await Product.findById(req.params.productId);
     if (!product) {
-      return res.status(404).json({ message: 'Product not found' });
+      return res.status(404).json({ message: "Product not found" });
     }
     product.variants.push(req.body);
     await product.save();
     res.status(201).json(product);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ error: error.message});
   }
 };
 
 exports.getVariant = async (req, res) => {
-    try {
-      const product = await Product.findById(req.params.productId);
-      if (!product) {
-        return res.status(404).json({ message: 'Product not found' });
-      }
-  
-      const variant = product.variants.id(req.params.variantId);
-      if (!variant) {
-        return res.status(404).json({ message: 'Variant not found' });
-      }
-  
-      res.status(200).json(variant);
-    } catch (error) {
-      res.status(500).json({ error: error.message });
+  try {
+    const product = await Product.findById(req.params.productId);
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
     }
-  };
+
+    const variant = product.variants.id(req.params.variantId);
+    if (!variant) {
+      return res.status(404).json({ message: "Variant not found" });
+    }
+
+    res.status(200).json(variant);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
 
 exports.updateVariant = async (req, res) => {
   try {
     const product = await Product.findById(req.params.productId);
     if (!product) {
-      return res.status(404).json({ message: 'Product not found' });
+      return res.status(404).json({ message: "Product not found" });
     }
     const variant = product.variants.id(req.params.variantId);
     if (!variant) {
-      return res.status(404).json({ message: 'Variant not found' });
+      return res.status(404).json({ message: "Variant not found" });
     }
     variant.set(req.body);
     await product.save();
@@ -104,11 +120,11 @@ exports.deleteVariant = async (req, res) => {
   try {
     const product = await Product.findById(req.params.productId);
     if (!product) {
-      return res.status(404).json({ message: 'Product not found' });
+      return res.status(404).json({ message: "Product not found" });
     }
     const variant = product.variants.id(req.params.variantId);
     if (!variant) {
-      return res.status(404).json({ message: 'Variant not found' });
+      return res.status(404).json({ message: "Variant not found" });
     }
     variant.remove();
     await product.save();
