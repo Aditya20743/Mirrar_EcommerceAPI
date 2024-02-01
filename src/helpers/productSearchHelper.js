@@ -1,5 +1,3 @@
-const mongoose = require('mongoose');
-
 const productSearchHelper = (query, req) => {
     if (req.query.search) {
         const searchTerm = req.query.search;
