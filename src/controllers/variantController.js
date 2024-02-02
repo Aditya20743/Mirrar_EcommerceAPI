@@ -56,14 +56,15 @@ exports.deleteVariant = async (req, res) => {
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
     }
-    const variant = product.variants.id(req.params.variantId);
-    if (!variant) {
-      return res.status(404).json({ message: "Variant not found" });
-    }
-    variant.remove();
+
+    const variantId = req.params.variantId;
+    product.variants = product.variants.filter(variant => variant._id.toString() !== variantId);
+
     await product.save();
+    
     res.status(204).send();
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
+

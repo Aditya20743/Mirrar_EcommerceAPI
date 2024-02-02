@@ -63,9 +63,9 @@ describe("Product Controller Tests", () => {
   // More tests...
   it("should update a product by ID", (done) => {
     const updatedProductData = {
-        name: 'Updated Test Product58',
-        description: 'Updated descriptionsd',
-        price: 39.99,
+      name: "Updated Test Product58",
+      description: "Updated descriptionsd",
+      price: 39.99,
     };
 
     chai

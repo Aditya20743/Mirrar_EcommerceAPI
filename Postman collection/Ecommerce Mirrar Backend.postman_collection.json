@@ -1,0 +1,309 @@
+{
+	"info": {
+		"_postman_id": "1e0b7b4f-4414-475a-be38-e5c5aa5eb88a",
+		"name": "Ecommerce Mirrar Backend",
+		"description": "1. **Product Management:**\n    - Create a new product\n    - Retrieve product details by ID\n    - Update product information\n    - Delete a product\n    - Search products by Name, Description, Variant\n2. **Variant Management:**\n    - Add a new variant to a product\n    - Retrieve variant details by ID within a specific product\n    - Update variant information\n    - Delete a variant from a product\n\nHow to Use:\n\n1. Open Postman.\n2. Import the Mirrar Ecommerce Backend Collection.\n3. Explore each folder representing different functionalities.\n4. Review and execute requests to interact with the backend API.\n5. Leverage request parameters, headers, and bodies as needed.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32359680"
+	},
+	"item": [
+		{
+			"name": "Product Api calls",
+			"item": [
+				{
+					"name": "getProductById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/products/65bbdae79d4dde3950693d63",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"products",
+								"65bbdae79d4dde3950693d63"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createProduct",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Proxy Product\",\r\n  \"description\": \"This is an Proxy product\",\r\n  \"price\": 25.99,\r\n  \"variants\": [\r\n    {\r\n      \"name\": \"Proxy Variant\",\r\n      \"sku\": \"VAR123\",\r\n      \"additionalCost\": 5.0,\r\n      \"stockCount\": 20\r\n    }\r\n  ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateProduct",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Updated Product Name\",\r\n  \"description\": \"Updated product description\",\r\n  \"price\": 69.99\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/products/65bbdae79d4dde3950693d63",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"products",
+								"65bbdae79d4dde3950693d63"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteProduct",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/products/65bbdbcc017ce9386d04068c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"products",
+								"65bbdbcc017ce9386d04068c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SearchByName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/products?search=Proxy",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"products"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "Proxy"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SearchByDescription",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/products?search=Updated%20descriptionsd",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"products"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "Updated%20descriptionsd"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SearchByVariant",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/products?search=Variant%201A",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"products"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "Variant%201A"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Variant Api calls",
+			"item": [
+				{
+					"name": "CreateVariant",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"New Variant\",\r\n  \"sku\": \"123456\",\r\n  \"additionalCost\": 5.99,\r\n  \"stockCount\": 10\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/products/65bbdae79d4dde3950693d63/variants",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"products",
+								"65bbdae79d4dde3950693d63",
+								"variants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getVariant",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/products/65bbdae79d4dde3950693d63/variants/65bc7c2b41c937b91f7f4eca",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"products",
+								"65bbdae79d4dde3950693d63",
+								"variants",
+								"65bc7c2b41c937b91f7f4eca"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateVariant",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Updated Variant\",\r\n  \"additionalCost\": 7.99\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/products/65bbdae79d4dde3950693d63/variants/65bc7c2b41c937b91f7f4eca",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"products",
+								"65bbdae79d4dde3950693d63",
+								"variants",
+								"65bc7c2b41c937b91f7f4eca"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Variant",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/products/65bbdfda8c2fc5ce1024e872/variants/65bbdfda8c2fc5ce1024e875",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"products",
+								"65bbdfda8c2fc5ce1024e872",
+								"variants",
+								"65bbdfda8c2fc5ce1024e875"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
