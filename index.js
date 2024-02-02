@@ -20,6 +20,9 @@ mongoose.connect( process.env.MONGO_URI)
 // Middleware
 app.use(bodyParser.json());
 
+app.get('/', (req, res) => {
+  res.send('Hello, World!');
+});
 // Use product routes
 app.use('/api', productRoutes);
 
